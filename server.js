@@ -1,21 +1,19 @@
 const express = require('express');
 const axios = require('axios');
 
-// Create Express app
+
 const app = express();
 const port = 3000;
 
-// Enable JSON parsing
+
 app.use(express.json());
 
-// Serve static files
+
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
-
-// Route for handling speech recognition and chat
 app.post('/process-speech', async (req, res) => {
   const speechResult = req.body.speech;
   console.log('Speech:', speechResult);
@@ -32,10 +30,9 @@ app.post('/process-speech', async (req, res) => {
   }
 });
 
-// Function to call the ChatGPT API
 async function callChatGPTAPI(input) {
   const url = 'https://api.openai.com/v1/chat/completions';
-  const apiKey = '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'; // Replace with your actual ChatGPT API key
+  const apiKey = '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'; 
   const headers = {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${apiKey}`
